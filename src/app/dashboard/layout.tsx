@@ -13,6 +13,10 @@ export default function DashboardLayout({
   const { user, loading } = useAuth()
   const router = useRouter()
 
+  // Check if user is authenticated and has admin role
+  // If not, redirect to login page
+  // If user is authenticated but not an admin, redirect to home page
+
   useEffect(() => {
     if (!loading && !user) {
       router.push("/login")

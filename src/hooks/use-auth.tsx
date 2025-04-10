@@ -27,13 +27,30 @@ const AuthContext = createContext<AuthContextType>({
   logout: () => {},
 });
 
+// ✅ Toggle this to enable or disable dev-mode bypass
+const DEV_MODE = true;
+
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
-    // Check auth state on mount
+    if (DEV_MODE) {
+      // Mock user object
+      const mockUser: User = {
+        id: "dev-001",
+        name: "Dev Admin",
+        email: "admin@dev.local",
+        role: "admin",
+        avatar: "/avatars/user1.png",
+      };
+      setUser(mockUser);
+      setLoading(false);
+      return;
+    }
+
+    // Check real auth state on mount
     const currentUser = authService.getCurrentUser();
     setUser(currentUser);
     setLoading(false);
@@ -44,9 +61,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       const user = authService.login(email, password);
       if (!user) throw new Error("Invalid credentials");
-      
+
       setUser(user);
-      
+
       // Redirect based on role
       if (user.role === "admin") {
         router.push("/dashboard");
@@ -74,6 +91,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       {children}
     </AuthContext.Provider>
   );
-};
+}
 
 export const useAuth = () => useContext(AuthContext);
