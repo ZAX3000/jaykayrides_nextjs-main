@@ -1,6 +1,6 @@
-// firebase.ts
-import firebase from 'firebase/app';
-import 'firebase/firestore';
+// src/hooks/firebase.ts
+import { initializeApp, getApps, getApp } from "firebase/app"
+import { getFirestore } from "firebase/firestore"
 
 const firebaseConfig = {
   apiKey: "AIzaSyBfSsUdqhwhYdG3SpGkHDgcOVW5P0YGiGM",
@@ -11,14 +11,10 @@ const firebaseConfig = {
   messagingSenderId: "387124074806",
   appId: "1:387124074806:web:554a5c91b6815a6599bb97",
   measurementId: "G-PYP2GSR90E"
-};
-
-// Initialize Firebase
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
 }
 
-const firestore = firebase.firestore();
+const app = getApps().length ? getApp() : initializeApp(firebaseConfig)
 
-export { firestore };
-export default firebase;
+const firestore = getFirestore(app)
+
+export { firestore }
