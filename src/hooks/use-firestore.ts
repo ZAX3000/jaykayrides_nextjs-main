@@ -36,7 +36,7 @@ type Ride = {
   startLocation?: string
   destination?: string
   status?: string
-  charge?: number
+  charge?: string
   distance?: number
   duration?: number
   createdAt?: string

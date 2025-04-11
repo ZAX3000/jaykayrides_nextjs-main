@@ -10,6 +10,7 @@ import {
   BarChart3,
   Settings,
   LogOut,
+  Car,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useAuth } from "@/hooks/use-auth"
@@ -44,6 +45,11 @@ const routes = [
     label: "Settings",
     icon: Settings,
     href: "/dashboard/settings",
+  },
+  {
+    label: "Recent Rides",
+    icon: Car,
+    href: "/dashboard/recent-rides",
   },
 ]
 

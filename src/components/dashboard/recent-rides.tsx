@@ -37,7 +37,10 @@ export function RecentRides() {
         {rides.slice(0, 5).map((ride) => {
           const pickupAddress = ride.startLocation || "Unknown"
           const destinationAddress = ride.destination || "Unknown"
+          const charge = ride.charge || "Unknown"
           const status = ride.status ?? "unknown"
+
+          // {typeof ride.charge === "number" ? `$${ride.charge.toFixed(2)}` : "—"}
 
           return (
             <TableRow key={ride.id}>
@@ -50,7 +53,7 @@ export function RecentRides() {
                 </Badge>
               </TableCell>
               <TableCell className="text-right">
-                {typeof ride.charge === "number" ? `$${ride.charge.toFixed(2)}` : "—"}
+                {charge || "—"}
               </TableCell>
             </TableRow>
           )

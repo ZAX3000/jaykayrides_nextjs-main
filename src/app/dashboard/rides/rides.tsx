@@ -39,7 +39,7 @@ export default function RidesPage() {
 
               const pickup = ride.startLocation || "Unknown"
               const destination = ride.destination || "Unknown"
-              const charge = ride.charge || (ride.charge ? `$${ride.charge.toFixed(2)}` : "—")
+              const charge = ride.charge || "Unknown"
 
               return (
                 <TableRow key={ride.id}>
@@ -53,7 +53,7 @@ export default function RidesPage() {
                       {ride.status?.replace("_", " ") || "unknown"}
                     </Badge>
                   </TableCell>
-                  <TableCell>{charge}</TableCell>
+                  <TableCell>{charge || "—"}</TableCell>
                 </TableRow>
               )
             })}
