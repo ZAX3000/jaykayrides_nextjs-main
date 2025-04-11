@@ -26,10 +26,12 @@ export default function RidesPage() {
               <TableHead>ID</TableHead>
               <TableHead>Customer</TableHead>
               <TableHead>Driver</TableHead>
-              <TableHead>Pickup</TableHead>
+              <TableHead>Start Location</TableHead>
               <TableHead>Destination</TableHead>
               <TableHead>Status</TableHead>
               <TableHead>Amount</TableHead>
+              <TableHead>Start Time</TableHead>
+              <TableHead>Completed Date</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -37,7 +39,7 @@ export default function RidesPage() {
               const user = users.find(u => u.id === ride.userId)
               const driver = drivers.find(d => d.id === ride.driverId)
 
-              const pickup = ride.startLocation || "Unknown"
+              const startLocation = ride.startLocation || "Unknown"
               const destination = ride.destination || "Unknown"
               const charge = ride.charge || "Unknown"
 
@@ -46,7 +48,7 @@ export default function RidesPage() {
                   <TableCell>#{ride.id}</TableCell>
                   <TableCell>{user  ? `${user.firstName ?? ""} ${user.lastName ?? ""}`.trim() || user.email  : "Unknown"}</TableCell>
                   <TableCell>{driver?.driverName || "Unassigned"}</TableCell>
-                  <TableCell>{pickup.split(",")[0]}</TableCell>
+                  <TableCell>{startLocation.split(",")[0]}</TableCell>
                   <TableCell>{destination.split(",")[0]}</TableCell>
                   <TableCell>
                     <Badge variant={statusVariant(ride.status)}>
@@ -54,6 +56,10 @@ export default function RidesPage() {
                     </Badge>
                   </TableCell>
                   <TableCell>{charge || "—"}</TableCell>
+                  <TableCell>{new Date(ride.createdAt || "").toLocaleString()}</TableCell>                  
+                  <TableCell>{new Date(ride.completedAt || "").toLocaleString()}</TableCell>
+                  {/* <TableCell>{ride.distance || "—"}</TableCell> */}
+                  {/* <TableCell>{ride.duration || "—"}</TableCell> */}
                 </TableRow>
               )
             })}
