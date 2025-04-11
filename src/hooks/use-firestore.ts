@@ -31,24 +31,17 @@ type Driver = User & {
 
 type Ride = {
   id: string
-  userId: string
-  driverId: string
-  pickup: {
-    address: string
-    lat: number
-    lng: number
-  }
-  destination: {
-    address: string
-    lat: number
-    lng: number
-  }
-  status: "requested" | "accepted" | "in_progress" | "completed" | "cancelled"
-  fare: number
-  distance: number
-  duration: number
-  createdAt: string
+  userId?: string
+  driverId?: string
+  startLocation?: string
+  destination?: string
+  status?: string
+  fare?: number
+  distance?: number
+  duration?: number
+  createdAt?: string
   completedAt?: string
+  // add any other real Firestore fields you want to support
 }
 
 export function useFirestore() {

@@ -16,7 +16,7 @@ export function RecentRides() {
       case "cancelled":
         return "destructive"
       default:
-        return "outline"
+        return "outline" // fallback for unknown statuses like "no_answer"
     }
   }
 
@@ -34,21 +34,27 @@ export function RecentRides() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {rides.slice(0, 5).map((ride) => (
-          <TableRow key={ride.id}>
-            <TableCell className="font-medium">#{ride.id}</TableCell>
-            <TableCell>{ride.pickup.address.split(",")[0] || "Unknown"}</TableCell>
-            <TableCell>{ride.destination.address.split(",")[0] || "Unknown"}</TableCell>
-            <TableCell>
-              <Badge variant={statusVariant(ride.status)}>
-                {ride.status.replace("_", " ")}
-              </Badge>
-            </TableCell>
-            <TableCell className="text-right">
-              {ride.fare ? `$${ride.fare.toFixed(2)}` : "—"}
-            </TableCell>
-          </TableRow>
-        ))}
+        {rides.slice(0, 5).map((ride) => {
+          const pickupAddress = ride.startLocation || "Unknown"
+          const destinationAddress = ride.destination || "Unknown"
+          const status = ride.status ?? "unknown"
+
+          return (
+            <TableRow key={ride.id}>
+              <TableCell className="font-medium">#{ride.id}</TableCell>
+              <TableCell>{pickupAddress.split(",")[0]}</TableCell>
+              <TableCell>{destinationAddress.split(",")[0]}</TableCell>
+              <TableCell>
+                <Badge variant={statusVariant(status)}>
+                  {status.replace("_", " ")}
+                </Badge>
+              </TableCell>
+              <TableCell className="text-right">
+                {typeof ride.fare === "number" ? `$${ride.fare.toFixed(2)}` : "—"}
+              </TableCell>
+            </TableRow>
+          )
+        })}
       </TableBody>
     </Table>
   )
