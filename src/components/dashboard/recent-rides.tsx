@@ -50,7 +50,7 @@ export function RecentRides() {
                 </Badge>
               </TableCell>
               <TableCell className="text-right">
-                {typeof ride.fare === "number" ? `$${ride.fare.toFixed(2)}` : "—"}
+                {typeof ride.charge === "number" ? `$${ride.charge.toFixed(2)}` : "—"}
               </TableCell>
             </TableRow>
           )
