@@ -44,8 +44,8 @@ export default function RidesPage() {
               return (
                 <TableRow key={ride.id}>
                   <TableCell>#{ride.id}</TableCell>
-                  <TableCell>{user?.name || user?.email || "Unknown"}</TableCell>
-                  <TableCell>{driver?.name || "Unassigned"}</TableCell>
+                  <TableCell>{user  ? `${user.firstName ?? ""} ${user.lastName ?? ""}`.trim() || user.email  : "Unknown"}</TableCell>
+                  <TableCell>{driver?.driverName || "Unassigned"}</TableCell>
                   <TableCell>{pickup.split(",")[0]}</TableCell>
                   <TableCell>{destination.split(",")[0]}</TableCell>
                   <TableCell>

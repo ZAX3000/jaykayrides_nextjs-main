@@ -6,7 +6,8 @@ import { collection, onSnapshot } from "firebase/firestore"
 
 type User = {
   id: string
-  name: string
+  firstName: string
+  lastName: string
   email: string
   role: "admin" | "driver" | "user"
   joinDate: string
@@ -15,8 +16,15 @@ type User = {
   avatar?: string
 }
 
-type Driver = User & {
-  vehicle: {
+// type Driver = User & {}
+// driver no longer extends user, as per the new schema
+
+type Driver = {
+  id: string
+  driverName: string
+  phone?: string
+  rating?: number
+  vehicleInfo?: {
     make: string
     model: string
     year: number
@@ -26,7 +34,10 @@ type Driver = User & {
     lat: number
     lng: number
   }
-  rating?: number
+  status?: "active" | "inactive" | "on_trip"
+  lastActive?: string
+  joinDate?: string
+  avatar?: string
 }
 
 type Ride = {
