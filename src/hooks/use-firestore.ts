@@ -41,6 +41,9 @@ type Driver = {
 }
 
 type Ride = {
+  firstName: string
+  lastName: string
+  phoneNumber: string
   id: string
   userId?: string
   driverId?: string

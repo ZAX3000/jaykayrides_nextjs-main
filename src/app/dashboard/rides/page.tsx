@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 
 export default function RidesPage() {
-  const { rides, users, drivers, loading } = useFirestore()
+  const { rides, drivers, loading } = useFirestore()
 
   if (loading) {
     return (
@@ -36,9 +36,7 @@ export default function RidesPage() {
           </TableHeader>
           <TableBody>
             {rides.map((ride) => {
-              const user = users.find(u => u.id === ride.userId)
               const driver = drivers.find(d => d.id === ride.driverId)
-
               const startLocation = ride.startLocation || "Unknown"
               const destination = ride.destination || "Unknown"
               const charge = ride.charge || "Unknown"
@@ -46,7 +44,11 @@ export default function RidesPage() {
               return (
                 <TableRow key={ride.id}>
                   <TableCell>#{ride.id}</TableCell>
-                  <TableCell>{user  ? `${user.firstName ?? ""} ${user.lastName ?? ""}`.trim() || user.email  : "Unknown"}</TableCell>
+                  <TableCell>
+                    {ride.firstName || ride.lastName
+                      ? `${ride.firstName ?? ""} ${ride.lastName ?? ""}`.trim()
+                      : ride.phoneNumber || "Unknown"}
+                  </TableCell>
                   <TableCell>{driver?.driverName || "Unassigned"}</TableCell>
                   <TableCell>{startLocation.split(",")[0]}</TableCell>
                   <TableCell>{destination.split(",")[0]}</TableCell>
