@@ -4,6 +4,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { RecentRides } from "@/components/dashboard/recent-rides"
 import { OverviewChart } from "@/components/dashboard/overview-chart"
 import { useFirestore } from "@/hooks/use-firestore"
+import Link from "next/link"
 
 export default function DashboardPage() {
   const { rides, users, drivers } = useFirestore()
@@ -138,7 +139,11 @@ export default function DashboardPage() {
         </Card>
         <Card className="col-span-3">
           <CardHeader>
-            <CardTitle>Recent Rides</CardTitle>
+            <Link href="/dashboard/rides">
+              <CardTitle className="hover:underline cursor-pointer">
+                Recent Rides
+              </CardTitle>
+            </Link>
           </CardHeader>
           <CardContent>
             <RecentRides />

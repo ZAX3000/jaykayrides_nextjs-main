@@ -47,9 +47,9 @@ const routes = [
     href: "/dashboard/settings",
   },
   {
-    label: "Recent Rides",
+    label: "Rides",
     icon: Car,
-    href: "/dashboard/recent-rides",
+    href: "/dashboard/rides",
   },
 ]
 
