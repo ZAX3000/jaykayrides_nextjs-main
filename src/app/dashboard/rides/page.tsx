@@ -56,8 +56,12 @@ export default function RidesPage() {
                     </Badge>
                   </TableCell>
                   <TableCell>{charge || "—"}</TableCell>
-                  <TableCell>{new Date(ride.createdAt || "").toLocaleString()}</TableCell>                  
-                  <TableCell>{new Date(ride.completedAt || "").toLocaleString()}</TableCell>
+                  <TableCell>  
+                    {ride.createdAt ? ride.createdAt.toLocaleString() : "—"}
+                  </TableCell>                  
+                  <TableCell>
+                    {ride.completedAt ? ride.completedAt.toLocaleString() : "—"}
+                  </TableCell>
                   {/* <TableCell>{ride.distance || "—"}</TableCell> */}
                   {/* <TableCell>{ride.duration || "—"}</TableCell> */}
                 </TableRow>

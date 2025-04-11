@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { firestore } from "./firebase"
-import { collection, onSnapshot } from "firebase/firestore"
+import { collection, onSnapshot, Timestamp } from "firebase/firestore"
 
 type User = {
   id: string
@@ -50,8 +50,8 @@ type Ride = {
   charge?: string
   distance?: number
   duration?: number
-  createdAt?: string
-  completedAt?: string
+  createdAt?: Timestamp
+  completedAt?: Date
   // add any other real Firestore fields you want to support
 }
 
