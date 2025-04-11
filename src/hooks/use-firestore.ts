@@ -56,6 +56,8 @@ export function useFirestore() {
   const [drivers, setDrivers] = useState<Driver[]>([])
   const [rides, setRides] = useState<Ride[]>([])
   const [loading, setLoading] = useState(true)
+
+  console.log("Fetched rides:", rides)
   
   // Fetch users, drivers, and rides from Firestore
   useEffect(() => {

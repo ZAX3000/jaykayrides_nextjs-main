@@ -20,6 +20,8 @@ export function RecentRides() {
     }
   }
 
+  console.log("Recent rides:", rides)
+
   return (
     <Table>
       <TableHeader>
@@ -35,14 +37,16 @@ export function RecentRides() {
         {rides.slice(0, 5).map((ride) => (
           <TableRow key={ride.id}>
             <TableCell className="font-medium">#{ride.id}</TableCell>
-            <TableCell>{ride.pickup.address.split(",")[0]}</TableCell>
-            <TableCell>{ride.destination.address.split(",")[0]}</TableCell>
+            <TableCell>{ride.pickup.address.split(",")[0] || "Unknown"}</TableCell>
+            <TableCell>{ride.destination.address.split(",")[0] || "Unknown"}</TableCell>
             <TableCell>
               <Badge variant={statusVariant(ride.status)}>
                 {ride.status.replace("_", " ")}
               </Badge>
             </TableCell>
-            <TableCell className="text-right">${ride.fare.toFixed(2)}</TableCell>
+            <TableCell className="text-right">
+              {ride.fare ? `$${ride.fare.toFixed(2)}` : "—"}
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>
